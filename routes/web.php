@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +9,34 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// This way we get a new/separate instance of this every time we resolve it.
+app()->bind('example', function() {
+    return new \App\Example(5);
+});
+
+// This way we always get the same instance of this every time we resolve it.
+app()->singleton('example', function() {
+    return new \App\Example;
+});
+
+// Every time we call "\App\Services\Twitter" we get the same instance with the passed API key.
+app()->singleton('\App\Services\Twitter', function() {
+    return new \App\Services\Twitter('My-API-Key-23432oids9034209328');
+});
+
+app()->bind('App\Example', function(){
+    return new \App\Example(7);
+});
+
+Route::get('/a', function() {
+//    dd(app('App\Example'));
+    // This will work as well, even if we have not bound anything into the service container.
+//    dd(app('App\Example'));
+});
+
+//app();
+//resolve();
 
 // Posts
 
@@ -61,4 +88,3 @@ Route::middleware('mw1:Peter,Sam')->group(function() {
         echo 'Test Middleware';
     });
 });
-
