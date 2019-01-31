@@ -10,6 +10,8 @@
 |
 */
 
+$x = Request::server();
+
 // This way we get a new/separate instance of this every time we resolve it.
 app()->bind('example', function() {
     return new \App\Example(5);
@@ -61,6 +63,8 @@ Route::get('/authors/create', 'AuthorsController@create');
 Route::get('/authors/{author}', 'AuthorsController@show');
 Route::post('/authors/store', 'AuthorsController@store');
 Route::post('/authors/{author}/book', 'BooksController@store');
+
+//Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show']]);
 
 // Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');

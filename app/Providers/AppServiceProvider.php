@@ -15,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
         Schema::defaultStringLength(191);
 
         // Add post archives to sidebar
@@ -37,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Stripe::class, function($app) {
 
+            // Since we passed $app into the function, we can use it here to resolve something else that we may need to resolve something else.
+            
             // $x = $app->singleton(SomeOtherClass::class);
 
             return new Stripe(config('services.stripe.secret'));
