@@ -17,3 +17,10 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+function activatePlacesSearch() {
+	var input = document.getElementById('places-search');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+}
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCnNEeWLr2677RWeb7gNkP7ysRL4io3E&libraries=places&callback=activatePlacesSearch"></script>

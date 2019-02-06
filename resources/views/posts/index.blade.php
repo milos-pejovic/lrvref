@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <input id="places-search" /><br /><br />
+
     <div class="col-sm-8 blog-main">
 
         <h1>{{ trans('greetings.hello') }}</h1>

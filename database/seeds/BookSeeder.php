@@ -10,8 +10,8 @@ class BookSeeder extends Seeder
     
     private function create_random_title() {
         $title = '';
-	$words = ['Silmarillion', 'Master', 'Lord', 'Idiot', 'Throne', 'Dragon', 'Ring', 'Battle', 'Game', 'War', 'Sword', 'Magic', 'Horse', 'Steed', 'King', 'Princess', 'Prince', 'Quest'];
-	$number_of_title_words = rand(2, 5);
+	$words = ['Master', 'Lord', 'Idiot', 'Throne', 'Dragon', 'Ring', 'Battle', 'Game', 'War', 'Sword', 'Magic', 'Horse', 'Steed', 'King', 'Princess', 'Prince', 'Quest'];
+	$number_of_title_words = rand(2, 4);
 
 	for ($i = 0; $i < $number_of_title_words; $i++) {
             $word_index = array_rand($words);

@@ -1,4 +1,10 @@
 <?php
+
+use SKAgarwal\GoogleApi\PlacesApi;
+use App\Http\Resources\AuthorResource;
+use App\Http\Resources\AuthorCollection;
+use App\Author;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +16,13 @@
 |
 */
 
-$x = Request::server();
+
+Route::get('/tt', function() {
+//    return AuthorResource::collection(Author::all());
+//    return new AuthorResource(Author::first());
+//    return new AuthorCollection(Author::all());
+    return new AuthorCollection(Author::paginate());
+});
 
 // This way we get a new/separate instance of this every time we resolve it.
 app()->bind('example', function() {
@@ -91,4 +103,26 @@ Route::middleware('mw1:Peter,Sam')->group(function() {
     Route::get('test', function() {
         echo 'Test Middleware';
     });
+});
+
+Route::get('/gp', function() {
+    $googlePlaces = app('GooglePlaces');
+//    $googlePlaces = new PlacesApi(env('GOOGLE_PLACES_API_KEY'));
+
+      $response = $googlePlaces->placeAutocomplete('toronto');
+    
+//    $data = $googlePlaces->placeAutocomplete('tor');
+//    $response   = ['success' => true, 'data' => $data];
+//    dd(response()->json($response, 200));
+      
+      error_log(print_r($response, 1));
+      
+//    dd($response);
+});
+
+Route::get('/gpd', function() {
+    $googlePlaces = app('GooglePlaces');
+    $response = $googlePlaces->placeDetails('ChIJpTvG15DL1IkRd8S0KlBVNTI');
+    
+    //dd($response);
 });
