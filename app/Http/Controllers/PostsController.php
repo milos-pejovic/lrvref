@@ -7,6 +7,7 @@ use App\Post;
 use Carbon\Carbon;
 use App\Repositories\Posts;
 use Illuminate\Support\Facades\Lang;
+use App\Rules\LocationExists;
 
 class PostsController extends Controller
 {
@@ -15,7 +16,7 @@ class PostsController extends Controller
      * 
      */
     public function __construct() {
-        $this->middleware('auth')->except(['index', 'show']);
+//        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -72,13 +73,26 @@ class PostsController extends Controller
         // ]);
 
         /**
-         * If valdiation fails, it redirects to the previous page and gives a populated "errors" variable.
+         * If validation fails, it redirects to the previous page and gives a populated "errors" variable.
          */
-        $this->validate(request(), [
-            'title' => 'required|min:2|max:50',
-            'body' => 'required'
-        ]);    
+//        $this->validate(request(), [
+//            'title' => 'required|min:2|max:50',
+//            'title' => ['required', 'min:2', 'max:50'],
+//            'body' => 'required',
+//            'body' => [new LocationExists(request('title'))]
+//        ]);    
 
+        $validator = \Validator::make(request(['title', 'body']), [
+//            'title' => 'required|min:2|max:50',
+            'title' => ['required', 'min:2', 'max:50'],
+//            'body' => 'required',
+            'body' => [new LocationExists(request('title')), 'required']
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 200);
+        }
+        
         Post::create([
             'title' => request('title'),
             'body' => request('body'),

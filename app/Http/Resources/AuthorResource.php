@@ -13,6 +13,7 @@ class AuthorResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    
     public function toArray($request)
     {
         return [
@@ -21,7 +22,8 @@ class AuthorResource extends JsonResource
           'last_name' => $this->last_name,
           'about' => $this->about,
           'books' => BookResource::collection($this->books),
-          'secret' => $this->when(Auth::user()->isAdmin(), 'secret-value'),
+//          'secret' => $this->when(Auth::user()->isAdmin(), 'secret-value'),
+          'secret' => $this->when($this->id % 2 == 0, 'secret-value'),
           'created_at' => $this->created_at,
           'updated_at' => $this->updated_at,
         ];

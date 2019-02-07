@@ -20,8 +20,8 @@ use App\Author;
 Route::get('/tt', function() {
 //    return AuthorResource::collection(Author::all());
 //    return new AuthorResource(Author::first());
-//    return new AuthorCollection(Author::all());
-    return new AuthorCollection(Author::paginate());
+    return new AuthorCollection(Author::all());
+//    return new AuthorCollection(Author::paginate());
 });
 
 // This way we get a new/separate instance of this every time we resolve it.
