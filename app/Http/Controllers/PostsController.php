@@ -83,11 +83,10 @@ class PostsController extends Controller
 //        ]);    
 
         $validator = \Validator::make(request(['title', 'body']), [
-//            'title' => 'required|min:2|max:50',
             'title' => ['required', 'min:2', 'max:50'],
-//            'body' => 'required',
             'body' => [new LocationExists(request('title')), 'required']
         ]);
+        
         
         if ($validator->fails()) {
             return response()->json($validator->messages(), 200);

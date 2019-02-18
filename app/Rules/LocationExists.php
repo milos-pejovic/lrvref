@@ -31,7 +31,7 @@ class LocationExists implements Rule
         error_log('Title: ' . $this->title);
         
         $location_google_id = $value;
-        // Do a DB search with thid Google Places ID.
+        // Do a DB search with the Google Places ID.
             // If it exists, the value is valid.
         // If not, do a Google Places API Details call with the ID.
             // If exists, value is valid. Enter the result into the DB.
