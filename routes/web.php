@@ -126,3 +126,11 @@ Route::get('/gpd', function() {
     
     //dd($response);
 });
+
+Route::get('/coll', function() {
+    $coll = collect([1, 2, 3, 4, 5, 6, 7, 8])->reject(function($item) {
+        return $item % 2 !== 0;
+    });
+    
+    dd($coll);
+});
