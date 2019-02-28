@@ -14,12 +14,13 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Post::class, function (Faker $faker) {
+    $user_ids = App\User::pluck('id');
+    
     return [
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
-        'user_id' => 1
-        // 'user_id' => function() {
-        //     return factory(App\User::class)->create()->id;
-        // },
+        'user_id' => $user_ids[rand(0, (count($user_ids)) - 1)],
+        'created_at' => now(),
+        'updated_at' => now()
     ];
 });

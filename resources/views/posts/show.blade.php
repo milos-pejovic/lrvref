@@ -49,7 +49,8 @@
                       </div>
 
                       <div calss="form-group">
-                          <button type="submit" class="btn btn-primary">Add Comment</button>    
+                          <button type="submit" class="btn btn-primary">Add Comment</button>  
+                          <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Update</a>  
                       </div>  
 
                   </form>

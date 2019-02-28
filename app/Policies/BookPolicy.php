@@ -19,7 +19,7 @@ class BookPolicy
      */
     public function view(User $user, Book $book)
     {
-        //
+//        return $user->id == $book->user_id;
     }
 
     /**

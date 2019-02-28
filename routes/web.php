@@ -46,7 +46,6 @@ app()->bind('App\Example', function(){
 Route::get('/a', function() {
 //    dd(app('App\Example'));
     // This will work as well, even if we have not bound anything into the service container.
-//    dd(app('App\Example'));
 });
 
 //app();
@@ -57,10 +56,12 @@ Route::get('/a', function() {
 Route::get('/', 'PostsController@index')->name('home');
 Route::get('/posts', 'PostsController@index')->name('home');
 Route::get('/posts/create', 'PostsController@create');
+Route::get('/posts/{post}/edit', 'PostsController@edit');
+Route::patch('/posts/{post}', 'PostsController@update');
 Route::post('/posts', 'PostsController@store');
 Route::get('/posts/{post}', 'PostsController@show');
-Route::post('/posts/{post}/comments', 'CommentsController@store');
 
+Route::post('/posts/{post}/comments', 'CommentsController@store');
 Route::get('/posts/tags/{tag}', 'TagsController@index');
 
 // Tasks
@@ -127,8 +128,22 @@ Route::get('/gpd', function() {
     //dd($response);
 });
 
-Route::get('/coll', function() {
+// Gates
+
+Route::get('/gate', function() {
     
-    factory(\App\Author::class, 50)->create();
+//    Gate::before(function ($user, $ability) {
+//        if ($user->isSuperAdmin()) {
+//            return true;
+//        }
+//    });
+    
+    //Gate::forUser($user)->allows('test');
+    
+    if (Gate::allows('test-gate')) {
+        echo 'Passed the gate';
+    } else {
+        echo 'Did not pass the gate';
+    }
     
 });

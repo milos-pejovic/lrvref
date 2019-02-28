@@ -16,7 +16,7 @@ class PostsController extends Controller
      * 
      */
     public function __construct() {
-//        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -107,5 +107,33 @@ class PostsController extends Controller
         // );
 
         return redirect('/');
+    }
+    
+    /**
+     * 
+     * @param Post $post
+     * @return type
+     */
+    public function edit(Post $post) {
+        return view('posts.edit')->with('post', $post);
+    }
+    
+    /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @return type
+     */
+    public function update(Request $request, $id) {
+        $this->validate(request(), [
+            'title' => ['required', 'min:2'],
+            'body' => ['required', 'min:2']
+	]); 
+        
+        $post = Post::find($id);
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+        return redirect('/posts/' . $id);
     }
 }
