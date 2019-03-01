@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-      \App\Book::class => \App\Policies\BookPolicies::class
+        \App\Post::class => \App\Policies\PostPolicy::class
     ];
 
     /**
@@ -25,5 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        
+        Gate::define('update-posts', function($user, $post) {
+            if ($user->id == $post->user->id) {
+                return true;
+            }
+        });
+        
     }
 }

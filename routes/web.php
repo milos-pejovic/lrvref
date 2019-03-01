@@ -56,11 +56,25 @@ Route::get('/a', function() {
 Route::get('/', 'PostsController@index')->name('home');
 Route::get('/posts', 'PostsController@index')->name('home');
 Route::get('/posts/create', 'PostsController@create');
+
 Route::get('/posts/{post}/edit', 'PostsController@edit');
+
+//Route::get('/posts/{post}/edit', function($post) {
+//    echo 'Allowed to EDIT';
+//})->middleware('can:edit,post');
+
+//Route::get('/posts/{post}/edit', function(App\Post $post) {
+//    if (Gate::allows('update-posts', $post)) {
+//        $posts_controller = new App\Http\Controllers\PostsController();
+//        return $posts_controller->edit($post);
+//    } else {
+//        echo '403';
+//    }
+//});
+
 Route::patch('/posts/{post}', 'PostsController@update');
 Route::post('/posts', 'PostsController@store');
 Route::get('/posts/{post}', 'PostsController@show');
-
 Route::post('/posts/{post}/comments', 'CommentsController@store');
 Route::get('/posts/tags/{tag}', 'TagsController@index');
 

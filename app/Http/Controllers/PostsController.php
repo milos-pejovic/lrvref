@@ -115,6 +115,7 @@ class PostsController extends Controller
      * @return type
      */
     public function edit(Post $post) {
+        $this->authorize('edit', $post);
         return view('posts.edit')->with('post', $post);
     }
     
